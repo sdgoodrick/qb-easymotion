@@ -5,7 +5,7 @@ function getVisibleElements(filter) {
 	// add and process any elements in a shadow root
 	if (el.shadowRoot) {
 	    let shadows = el.shadowRoot.querySelector('*');
-	    shadows.foreach(shadow => all.push(shadow));
+	    shadows.forEach(shadow => all.push(shadow));
 	}
 
 	let rect = el.getBoundingClientRect();
@@ -57,19 +57,14 @@ function getWordPositions(node, unit = "word") {
 	let selOffset = selection.anchorOffset;
 	selection.setBaseAndExtent(node, selStart, node, selOffset);
 
-	let position = {
-	    left:   -1,
-	    top:    -1,
-	    width:  0,
-	    height: 0,
-	};
-
 	let bound = selection.getRangeAt(0).getClientRects()[0];
 	if (bound && bound.height > 0 && bound.width > 0) {
-	    position.left   = bound.left;
-	    position.top    = bound.top;
-	    position.width  = bound.width;
-	    position.height = bound.height;
+	    let position = {
+		left:   bound.left,
+		top:    bound.top,
+		width:  bound.width,
+		height: bound.height,
+	    };
 
 	    positions.push(position);
 	}
